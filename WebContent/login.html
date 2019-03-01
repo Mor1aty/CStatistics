@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>登录</title>
+<link rel="stylesheet" type="text/css" href="./css/login.css" />
+<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+<script type="text/javascript" src="jquery/jquery.min.js"></script>
+<script type="text/javascript" src="layui/layui.js"></script>
+</head>
+
+<body>
+	<div class="container demo-1">
+		<div class="content">
+			<div id="large-header" class="large-header">
+				<canvas id="demo-canvas"></canvas>
+				<div class="logo_box">
+					<div class="title">空课管理系统</div>
+					<form class="layui-form" action="">
+						<div class="layui-form-item">
+							<label class="layui-form-label">帐号</label>
+							<div class="layui-input-block">
+								<input type="text" name="acc" required lay-verify="required"
+									placeholder="请输入帐号" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">密码</label>
+							<div class="layui-input-block">
+								<input type="password" name="pass" required
+									lay-verify="required" placeholder="请输入密码" autocomplete="off"
+									class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<button class="submit layui-btn layui-btn-normal" lay-submit
+								lay-filter="formDemo">登录</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="./js/TweenLite.min.js"></script>
+	<script src="./js/EasePack.min.js"></script>
+	<script src="./js/demo-1.js"></script>
+	<script src="./js/CommenData.js"></script>
+</body>
+<script>
+	localStorage.removeItem("CStatisticAccount");
+	layui.use('form', function() {
+		var form = layui.form;
+		//监听提交
+		form.on('submit(formDemo)', function(data) {
+			var acc = data.field.acc;
+			var pass = data.field.pass;
+			$.ajax({
+				url : baseurl + "login",
+				data : {
+					"account" : acc,
+					"password" : pass
+				},
+				type : 'post',
+				dataType : 'json',
+				timeout : 10000,// 超时时间设置为10秒；
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				success : function(data) {
+					if (data.code == 0) {						
+						layer.msg("登录成功", {
+							time : false,
+							btn : [ '确定' ],
+							yes : function() {
+								localStorage.setItem("CStatisticAccount", acc);
+								$(window).attr('location', 'index.html');
+							}
+						});
+					} else {
+						layer.msg(data.msg);
+					}
+				},
+				error : function(xhr, type, errorThrown) {
+					console.log(type);
+					layer.msg("未知错误");
+				}
+			});
+			return false;
+		});
+	});
+</script>
+
+</html>
