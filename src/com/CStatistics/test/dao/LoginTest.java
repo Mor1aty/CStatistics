@@ -28,15 +28,4 @@ public class LoginTest {
 		User user = ld.getUser("2016188085", "123456");
 		System.out.println(user);
 	}
-	@Test
-	public void getUserCount() throws SQLException {
-		LoginDao ld = new LoginDao();
-		System.out.println(ld.getUserCount());
-	}
-	
-	public static void main(String[] args) {
-		String a = new String("aaaa");
-		String b = new String("aaaa");
-		System.out.println(a==b);
-	}
 }

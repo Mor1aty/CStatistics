@@ -2,16 +2,16 @@ package com.CStatistics.servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.CStatistics.dao.LoginDao;
-import com.CStatistics.pojo.User;
+import com.CStatistics.dao.GetClazzDao;
+import com.CStatistics.pojo.Clazz;
 import com.CStatistics.utils.AllConstant;
 import com.CStatistics.utils.HttpUtil;
 import com.CStatistics.utils.JsonUtil;
@@ -20,19 +20,19 @@ import com.CStatistics.utils.JsonUtil;
  * 
  * @copyright ：神农大学生软件创新中心 版权所有 © 2018
  * 
- * @author 16计算机弓耀
+ * @author 17计算机 杜嘉慧
  * 
  * @version 1.0
  * 
- * @date 2018年12月8日下午6:04:18
+ * @date 2019年2月12日上午10:38:56
  * 
- * @Description TODO 登录接口
+ * @Description TODO 查看班级接口Sevlet
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/getClazz")
+public class GetClazzSevlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public LoginServlet() {
+	public GetClazzSevlet() {
 		super();
 	}
 
@@ -50,26 +50,23 @@ public class LoginServlet extends HttpServlet {
 		// 解析请求参数
 		HashMap<String, String> params = JsonUtil.getRequestParams(request);
 		// 参数校验
-		result = HttpUtil.checkParams(params, new String[] { "account", "password" });
+		result = HttpUtil.checkParams(params, null);
 		// 校验不通过，适用于需要请求参数的情况
 		if (!"".equals(result.trim())) {
 			response.getWriter().write(result);
 			return;
 		}
 		try {
-			LoginDao dao = new LoginDao();
-			User user = dao.getUser(params.get("account"), params.get("password"));
-			if (user == null) {
-				result = JsonUtil.jsonResponse(null, AllConstant.CODE_ERROR, "帐号或密码错误");
+			GetClazzDao dao = new GetClazzDao();
+			List<Clazz> clazz = dao.getClazz();
+			if (clazz == null) {
+				result = JsonUtil.jsonResponse(null, AllConstant.CODE_ERROR, "查看失败");
 			} else {
-				HttpSession session = request.getSession();
-				session.setAttribute("user", params.get("account").toString());
-				result = JsonUtil.jsonResponse(null, AllConstant.CODE_SUCCESS, "登录成功");
+				result = JsonUtil.jsonResponse(null, AllConstant.CODE_SUCCESS, "查看成功");
 			}
 		} catch (Exception e) {
 			result = JsonUtil.jsonResponse(null, AllConstant.CODE_ERROR, AllConstant.MSG_ERROR);
 		}
 		response.getWriter().write(result);
 	}
-
 }

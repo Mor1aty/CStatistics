@@ -23,14 +23,14 @@ public class UprestTest {
 	@Test
 	public void testPost() {
 		String url = "http://localhost:8080/CStatistics/";
-		ImitateLoginHttpUtil ilh = new ImitateLoginHttpUtil("2016188003", "123456", url, "upRest");
+		ImitateLoginHttpUtil ilh = new ImitateLoginHttpUtil("2017151016", "123456",url,"upRest");
 		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("time", "2019-2-1");
-		params.put("clazz", "02");
-		params.put("minister", "2016188001");
-		params.put("member1", "2016188003");
-		params.put("member2", "2016188004");
-		params.put("result", "Servlet测试");
+		params.put("time", "2019-2-22");
+		params.put("clazz", "01");
+		params.put("minister", "2017151016");
+		params.put("member1", "2017151016");
+		params.put("member2", "2017151016");
+		params.put("result", "sd");
 		String res = ilh.doPost(params);
 		System.out.println(res);
 	}
@@ -39,14 +39,14 @@ public class UprestTest {
 	@Test
 	public void testGet() {
 		String url = "http://localhost:8080/CStatistics/";
-		ImitateLoginHttpUtil ilh = new ImitateLoginHttpUtil("2016188003", "123456", url, "upRest");
+		ImitateLoginHttpUtil ilh = new ImitateLoginHttpUtil("2017151016", "123456",url,"upRest");
 		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("time", "2019-2-1");
-		params.put("clazz", "02");
-		params.put("minister", "2016188001");
-		params.put("member1", "2016188003");
-		params.put("member2", "2016188004");
-		params.put("result", "Servlet测试");
+		params.put("time", "2019-2-22");
+		params.put("clazz", "01");
+		params.put("minister", "2017151016");
+		params.put("member1", "2017151016");
+		params.put("member2", "2017151016");
+		params.put("result", "sd");
 		String res = ilh.doGet(params);
 		System.out.println(res);
 	}

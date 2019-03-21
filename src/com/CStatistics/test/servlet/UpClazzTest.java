@@ -6,34 +6,33 @@ import org.junit.Test;
 
 import com.CStatistics.utils.HttpUtil;
 
-
 /**
  * 
  * @copyright ：神农大学生软件创新中心 版权所有 © 2018
  * 
- * @author 16计算机弓耀
+ * @author 17计算机 杜嘉慧
  * 
  * @version 1.0
  * 
- * @date 2018年12月8日下午6:14:45
+ * @date 2019年2月12日上午11:22:17
  * 
- * @Description TODO 
- *	登录接口Servlet测试
+ * @Description TODO 导入班级信息接口Servlet
  */
-public class LoginTest {
+public class UpClazzTest {
 	// post 测试
 	@Test
 	public void testPost() {
-		String url = "http://localhost:8080/CStatistics/login";
-		InputStream is = HttpUtil.sendPost(url, "{account:'2017151016',password:'456789'}");
+		String url = "http://localhost:8080/CStatistics/upClazz ";
+		InputStream is = HttpUtil.sendPost(url, "name=计算机一班&num=23");
 		String result = HttpUtil.getString(is);
 		System.out.println(result);
 	}
+
 	// get 测试
 	@Test
 	public void testGet() {
-		String url = "http://localhost:8080/CStatistics/login";
-		InputStream is = HttpUtil.sendGet(url, "account=2016188085");
+		String url = "http://localhost:8080/CStatistics/upClazz ";
+		InputStream is = HttpUtil.sendPost(url, "name=计算机一班&num=21");
 		String result = HttpUtil.getString(is);
 		System.out.println(result);
 	}

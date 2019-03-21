@@ -23,7 +23,7 @@ public class UprestDao {
 	public int uprest(String time, String clazz, String minister, String member1, String member2, String result)
 			throws SQLException {
 		QueryRunner runner = new QueryRunner(JdbcUtil.getDataSource());
-		String sql = "insert into t_record(id,rd_clazz,rd_time,rd_minister,rd_member1,rd_member2,rd_result) values(?,?,?,?,?,?,?)";
-		return runner.update(sql, new Object[] {UUIDUtil.getUUID(),clazz, time, minister, member1, member2, result });
+		String sql = "insert into t_record(id,rd_time,rd_clazz,rd_minister,rd_member1,rd_member2,rd_result) values(?,?,?,?,?,?,?)";
+		return runner.update(sql, new Object[] {UUIDUtil.getUUID(),time, clazz, minister, member1, member2, result });
 	}
 }

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.CStatistics.dao.UpdatePassDao;
 import com.CStatistics.utils.AllConstant;
@@ -58,15 +59,19 @@ public class UpdateServlet extends HttpServlet {
 		}
 		try {
 			UpdatePassDao dao = new UpdatePassDao();
-			String account = request.getSession().getAttribute("user").toString();
-			int y = dao.updatePass(account, params.get("oldPass"), params.get("newPass"));
-			if (y > 0) {
-				result = JsonUtil.jsonResponse(null, AllConstant.CODE_SUCCESS, "修改密码成功");
+			HttpSession session = request.getSession(false);
+			if (session == null) {
+				result = JsonUtil.jsonResponse(null, AllConstant.CODE_ERROR, "你没登陆");
 			} else {
-				result = JsonUtil.jsonResponse(null, AllConstant.CODE_ERROR, "请先登录");
+				String account=session.getAttribute("user").toString();
+				int y=dao.updatePass(account, params.get("oldpass"), params.get("newpass"));
+				if (y > 0) {
+					result = JsonUtil.jsonResponse(null, AllConstant.CODE_SUCCESS, "修改密码成功");
+				} else {
+					result = JsonUtil.jsonResponse(null, AllConstant.CODE_ERROR, "请先登录");
 
+				}
 			}
-
 		} catch (Exception e) {
 			result = JsonUtil.jsonResponse(null, AllConstant.CODE_ERROR, AllConstant.MSG_ERROR);
 		}

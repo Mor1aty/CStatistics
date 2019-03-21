@@ -16,13 +16,14 @@ import com.CStatistics.dao.UprestDao;
  * 
  * @date 2019年2月11日下午12:47:43
  * 
- * @Description TODO 提交查课信息Dao接口测试
+ * @Description TODO 
+ * 提交查课信息Dao接口测试
  */
 public class UprestTest {
 	@Test
-	public void getUprest() throws SQLException {
-		UprestDao dao = new UprestDao();
-		int m = dao.uprest("2019-1-1", "01", "2016188001", "2016188003", "2016188004", "dao测试");
-		System.out.println(m);
-	}
+   public void getUprest() throws SQLException{
+	   UprestDao dao=new UprestDao();
+	   int m=dao.uprest("2019-2-2","01", "2017151016", "2017151016", "2017151016", "阿达");
+       System.out.println(m);
+   }
 }

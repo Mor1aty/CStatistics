@@ -1,11 +1,9 @@
 package com.CStatistics.test.servlet;
 
-import java.io.InputStream;
 import java.util.HashMap;
 
 import org.junit.Test;
 
-import com.CStatistics.utils.HttpUtil;
 import com.CStatistics.utils.ImitateLoginHttpUtil;
 
 /**
@@ -23,22 +21,23 @@ import com.CStatistics.utils.ImitateLoginHttpUtil;
  */
 public class SubmitTest {
 	// post 测试
-	@Test
-	public void testPost() {
-		String url = "http://localhost:8080/CStatistics/";
-		ImitateLoginHttpUtil ilh = new ImitateLoginHttpUtil("2016188003", "123456", url, "submit");
-		HashMap<String,String> params = new HashMap<String,String>();
-		params.put("rest", "1_0_0_1");
-		String res = ilh.doPost(params);
-		System.out.println(res);
-	}
-
-	// get 测试
-	@Test
-	public void testGet() {
-		String url = "http://localhost:8080/CStatistics/submit";
-		InputStream is = HttpUtil.sendGet(url, "rest=0_1_0_1_0");
-		String result = HttpUtil.getString(is);
-		System.out.println(result);
-	}
+		@Test
+		public void testPost() {
+			String url = "http://localhost:8080/CStatistics/submit";
+			ImitateLoginHttpUtil ilh=new ImitateLoginHttpUtil("2017151016", "123456", url,"submit");
+			HashMap<String, String> params=new HashMap<String,String>();
+			params.put("rest","0_1_0_1_0");
+			String res=ilh.doPost(params);
+			System.out.println(res);
+		}
+		// get 测试
+		@Test
+		public void testGet() {
+			String url = "http://localhost:8080/CStatistics/submit";
+			ImitateLoginHttpUtil ilh=new ImitateLoginHttpUtil("2017151016", "123456", url,"submit");
+			HashMap<String, String> params=new HashMap<String,String>();
+			params.put("rest","0_1_0_1_0");
+			String res=ilh.doGet(params);
+			System.out.println(res);
+		}
 }

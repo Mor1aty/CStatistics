@@ -16,20 +16,15 @@ import com.CStatistics.dao.SubmitDao;
  * 
  * @date 2019年1月13日下午4:56:58
  * 
- * @Description TODO 提交空课接口Dao测试
+ * @Description TODO 
+ *提交空课接口Dao测试
  */
 
 public class SubmitTest {
 	@Test
-	public void subMit() throws SQLException {
-		SubmitDao dao = new SubmitDao();
-		int i = dao.subMit("0_1_0_1_0", "2016188085");
-		System.out.println(i);
-	}
-
-	@Test
-	public void findMit() throws SQLException {
-		SubmitDao dao = new SubmitDao();
-		System.out.println(dao.findSub("2016188085"));
-	}
+     public void subMit() throws SQLException{
+    	 SubmitDao dao=new SubmitDao();
+    	int m=dao.subMit("0_1_0_1_0","2017151016");
+    	 System.out.println(m);
+     }
 }

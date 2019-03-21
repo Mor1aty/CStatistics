@@ -1,11 +1,9 @@
 package com.CStatistics.dao;
 
 import java.sql.SQLException;
-import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.MapHandler;
 
 import com.CStatistics.pojo.User;
 import com.CStatistics.utils.JdbcUtil;
@@ -22,6 +20,7 @@ import com.CStatistics.utils.JdbcUtil;
  * 
  * @Description TODO 登录接口Dao
  */
+
 public class LoginDao {
 	// 获取用户信息
 	public User getUser(String account, String password) throws SQLException {
@@ -29,12 +28,5 @@ public class LoginDao {
 		String sql = "select * from t_user where u_account = ? and u_password = ?;";
 		User user = runner.query(sql, new BeanHandler<User>(User.class), new Object[] { account, password });
 		return user;
-	}
-	
-	public int getUserCount() throws SQLException {
-		QueryRunner runner = new QueryRunner(JdbcUtil.getDataSource());
-		String sql = "SELECT COUNT(*) FROM t_user WHERE u_account = '2016188085';";
-		Map<String, Object> is = runner.query(sql, new MapHandler());
-		return Integer.parseInt(is.get("COUNT(*)").toString());
 	}
 }

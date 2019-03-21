@@ -19,9 +19,9 @@ import com.CStatistics.utils.JdbcUtil;
  * @Description TODO 修改管理员信息接口Dao
  */
 public class ChangeManagerDao {
-	public int change(String u_name, int u_gender, String u_clazz,String u_account) throws SQLException {
+	public int change(String account, int gender, String name, String clazz ) throws SQLException {
 		QueryRunner runner = new QueryRunner(JdbcUtil.getDataSource());
-		String sql = "update t_user set u_account=? u_name=? u_gender=? u_clazz=?";
-		return runner.update(sql, new Object[] {u_name, u_gender, u_clazz, u_account });
+		String sql = "update t_user set u_account=?,u_name=?,u_gender=?,u_clazz=? where u_identity=0";
+		return runner.update(sql, new Object[] { account, name, gender, clazz });
 	}
 }

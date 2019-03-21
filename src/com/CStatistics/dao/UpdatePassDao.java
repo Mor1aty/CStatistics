@@ -22,7 +22,8 @@ public class UpdatePassDao {
 	public int updatePass(String s, String oldPass, String newPass) throws SQLException {
 		QueryRunner runner = new QueryRunner(JdbcUtil.getDataSource());
 		String sql = "UPDATE t_user SET u_password = ? where u_account  = ? and u_password = ?";
-        return runner.update(sql,new Object[]{newPass,s,oldPass});        
+        return runner.update(sql,new Object[]{newPass,s,oldPass});
+        
 	}
 
 }

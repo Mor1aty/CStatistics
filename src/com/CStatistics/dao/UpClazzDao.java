@@ -1,10 +1,13 @@
 package com.CStatistics.dao;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 import org.apache.commons.dbutils.QueryRunner;
 
+import com.CStatistics.utils.DateUtil;
 import com.CStatistics.utils.JdbcUtil;
+import com.CStatistics.utils.UUIDUtil;
 
 /**
  * 
@@ -21,8 +24,9 @@ import com.CStatistics.utils.JdbcUtil;
 public class UpClazzDao {
 	public int upClazz(String name, String num) throws SQLException {
 		QueryRunner runner = new QueryRunner(JdbcUtil.getDataSource());
-		String sql = "insert into t_clazz(c_name,c_num) values ? ";
-		int t = runner.update(sql, new Object[] { name, num });
+		String sql = "insert into t_clazz(id,c_name,c_num,c_rest,c_end) values (?,?,?,?,?)";
+		int t = runner.update(sql,
+				new Object[] { UUIDUtil.getUUID(), name, num, num, DateUtil.dateToString(new Date()) });
 		return t;
 	}
 }
